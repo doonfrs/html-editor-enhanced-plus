@@ -1,5 +1,7 @@
 ///Class that is used by [WebView.shouldOverrideUrlLoading] event.
 ///It represents the policy to pass back to the decision handler.
+// ignore_for_file: constant_identifier_names
+
 class NavigationActionPolicy {
   final int _value;
 
@@ -14,7 +16,7 @@ class NavigationActionPolicy {
   static const ALLOW = NavigationActionPolicy._internal(1);
 
   @override
-  bool operator ==(value) => value == _value;
+  bool operator ==(other) => other == _value;
 
   @override
   int get hashCode => _value.hashCode;
@@ -175,7 +177,7 @@ class UserScriptInjectionTime {
   static const AT_DOCUMENT_END = UserScriptInjectionTime._internal(1);
 
   @override
-  bool operator ==(value) => value == _value;
+  bool operator ==(other) => other == _value;
 
   @override
   int get hashCode => _value.hashCode;

@@ -1,13 +1,13 @@
-import 'package:html_editor_enhanced/html_editor.dart'
+import 'package:html_editor_enhanced_plus/html_editor.dart'
     hide HtmlEditorController;
-import 'package:html_editor_enhanced/src/html_editor_controller_mobile.dart';
-import 'package:html_editor_enhanced/src/widgets/html_editor_widget_mobile.dart';
+import 'package:html_editor_enhanced_plus/src/html_editor_controller_mobile.dart';
+import 'package:html_editor_enhanced_plus/src/widgets/html_editor_widget_mobile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// HtmlEditor class for mobile
 class HtmlEditor extends StatelessWidget {
-  HtmlEditor({
+  const HtmlEditor({
     Key? key,
     required this.controller,
     this.callbacks,
@@ -50,8 +50,8 @@ class HtmlEditor extends StatelessWidget {
         otherOptions: otherOptions,
       );
     } else {
-      return Text(
-          'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart');
+      return const Text(
+          'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_plus/html_editor.dart');
     }
   }
 }

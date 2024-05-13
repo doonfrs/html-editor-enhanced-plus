@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
@@ -5,8 +7,8 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:html_editor_enhanced/utils/utils.dart';
+import 'package:html_editor_enhanced_plus/html_editor.dart';
+import 'package:html_editor_enhanced_plus/utils/utils.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
@@ -353,7 +355,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
           absorbing: !_enabled,
           child: Opacity(
             opacity: _enabled ? 1 : 0.5,
-            child: Container(
+            child: SizedBox(
               height: widget.htmlToolbarOptions.toolbarItemHeight + 15,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -398,7 +400,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         children: _buildChildren()
                           ..insert(
                               0,
-                              Container(
+                              SizedBox(
                                 height:
                                     widget.htmlToolbarOptions.toolbarItemHeight,
                                 child: IconButton(
@@ -413,7 +415,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                       _isExpanded = !_isExpanded;
                                     });
                                     await Future.delayed(
-                                        Duration(milliseconds: 100));
+                                        const Duration(milliseconds: 100));
                                     if (kIsWeb) {
                                       widget.controller.recalculateHeight();
                                     } else {
@@ -441,7 +443,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                               setState(mounted, this.setState, () {
                                 _isExpanded = !_isExpanded;
                               });
-                              await Future.delayed(Duration(milliseconds: 100));
+                              await Future.delayed(
+                                  const Duration(milliseconds: 100));
                               if (kIsWeb) {
                                 widget.controller.recalculateHeight();
                               } else {
@@ -467,7 +470,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
         ),
       );
     }
-    return Container(height: 0, width: 0);
+    return const SizedBox(height: 0, width: 0);
   }
 
   List<Widget> _buildChildren() {
@@ -507,17 +510,17 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               items: [
                 CustomDropdownMenuItem(
                     value: 'p',
-                    child: PointerInterceptor(child: Text('Normal'))),
+                    child: PointerInterceptor(child: const Text('Normal'))),
                 CustomDropdownMenuItem(
                     value: 'blockquote',
                     child: PointerInterceptor(
                       child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               border: Border(
                                   left: BorderSide(
                                       color: Colors.grey, width: 3.0))),
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text('Quote',
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: const Text('Quote',
                               style: TextStyle(
                                   fontFamily: 'times', color: Colors.grey))),
                     )),
@@ -528,50 +531,50 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: Colors.grey),
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text('Code',
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: const Text('Code',
                               style: TextStyle(
                                   fontFamily: 'courier', color: Colors.white))),
                     )),
                 CustomDropdownMenuItem(
                   value: 'h1',
                   child: PointerInterceptor(
-                      child: Text('Header 1',
+                      child: const Text('Header 1',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 32))),
                 ),
                 CustomDropdownMenuItem(
                   value: 'h2',
                   child: PointerInterceptor(
-                      child: Text('Header 2',
+                      child: const Text('Header 2',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 24))),
                 ),
                 CustomDropdownMenuItem(
                   value: 'h3',
                   child: PointerInterceptor(
-                      child: Text('Header 3',
+                      child: const Text('Header 3',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18))),
                 ),
                 CustomDropdownMenuItem(
                   value: 'h4',
                   child: PointerInterceptor(
-                      child: Text('Header 4',
+                      child: const Text('Header 4',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16))),
                 ),
                 CustomDropdownMenuItem(
                   value: 'h5',
                   child: PointerInterceptor(
-                      child: Text('Header 5',
+                      child: const Text('Header 5',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 13))),
                 ),
                 CustomDropdownMenuItem(
                   value: 'h6',
                   child: PointerInterceptor(
-                      child: Text('Header 6',
+                      child: const Text('Header 6',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 11))),
                 ),
@@ -643,19 +646,19 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   CustomDropdownMenuItem(
                     value: 'Courier New',
                     child: PointerInterceptor(
-                        child: Text('Courier New',
+                        child: const Text('Courier New',
                             style: TextStyle(fontFamily: 'Courier'))),
                   ),
                   CustomDropdownMenuItem(
                     value: 'sans-serif',
                     child: PointerInterceptor(
-                        child: Text('Sans Serif',
+                        child: const Text('Sans Serif',
                             style: TextStyle(fontFamily: 'sans-serif'))),
                   ),
                   CustomDropdownMenuItem(
                     value: 'Times New Roman',
                     child: PointerInterceptor(
-                        child: Text('Times New Roman',
+                        child: const Text('Times New Roman',
                             style: TextStyle(fontFamily: 'Times'))),
                   ),
                 ],
@@ -854,11 +857,11 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 items: [
                   CustomDropdownMenuItem(
                     value: 'pt',
-                    child: PointerInterceptor(child: Text('pt')),
+                    child: PointerInterceptor(child: const Text('pt')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'px',
-                    child: PointerInterceptor(child: Text('px')),
+                    child: PointerInterceptor(child: const Text('px')),
                   ),
                 ],
                 value: _fontSizeUnitSelectedItem,
@@ -1120,7 +1123,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                               newColor = color;
                             },
                             title: Text('Choose a Color',
-                                style: Theme.of(context).textTheme.headline6),
+                                style: Theme.of(context).textTheme.titleLarge),
                             width: 40,
                             height: 40,
                             spacing: 0,
@@ -1130,7 +1133,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                             enableOpacity: false,
                             showColorCode: true,
                             colorCodeHasColor: true,
-                            pickersEnabled: <ColorPickerType, bool>{
+                            pickersEnabled: const <ColorPickerType, bool>{
                               ColorPickerType.wheel: true,
                             },
                             copyPasteBehavior:
@@ -1146,7 +1149,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Cancel'),
+                              child: const Text('Cancel'),
                             ),
                             TextButton(
                                 onPressed: () {
@@ -1174,7 +1177,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                   }
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Reset to default color')),
+                                child: const Text('Reset to default color')),
                             TextButton(
                               onPressed: () {
                                 if (t.getIcons()[index].icon ==
@@ -1205,7 +1208,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 });
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Set color'),
+                              child: const Text('Set color'),
                             )
                           ],
                         ),
@@ -1308,38 +1311,42 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 items: [
                   CustomDropdownMenuItem(
                     value: 'decimal',
-                    child: PointerInterceptor(child: Text('1. Numbered')),
+                    child: PointerInterceptor(child: const Text('1. Numbered')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'lower-alpha',
-                    child: PointerInterceptor(child: Text('a. Lower Alpha')),
+                    child:
+                        PointerInterceptor(child: const Text('a. Lower Alpha')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'upper-alpha',
-                    child: PointerInterceptor(child: Text('A. Upper Alpha')),
+                    child:
+                        PointerInterceptor(child: const Text('A. Upper Alpha')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'lower-roman',
-                    child: PointerInterceptor(child: Text('i. Lower Roman')),
+                    child:
+                        PointerInterceptor(child: const Text('i. Lower Roman')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'upper-roman',
-                    child: PointerInterceptor(child: Text('I. Upper Roman')),
+                    child:
+                        PointerInterceptor(child: const Text('I. Upper Roman')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'disc',
-                    child: PointerInterceptor(child: Text('• Disc')),
+                    child: PointerInterceptor(child: const Text('• Disc')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'circle',
-                    child: PointerInterceptor(child: Text('○ Circle')),
+                    child: PointerInterceptor(child: const Text('○ Circle')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'square',
-                    child: PointerInterceptor(child: Text('■ Square')),
+                    child: PointerInterceptor(child: const Text('■ Square')),
                   ),
                 ],
-                hint: Text('Select list style'),
+                hint: const Text('Select list style'),
                 value: _listStyleSelectedItem,
                 onChanged: (String? changed) async {
                   void updateSelectedItem(dynamic changed) {
@@ -1529,33 +1536,35 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
                   CustomDropdownMenuItem(
-                      value: 1, child: PointerInterceptor(child: Text('1.0'))),
+                      value: 1,
+                      child: PointerInterceptor(child: const Text('1.0'))),
                   CustomDropdownMenuItem(
                     value: 1.2,
-                    child: PointerInterceptor(child: Text('1.2')),
+                    child: PointerInterceptor(child: const Text('1.2')),
                   ),
                   CustomDropdownMenuItem(
                     value: 1.4,
-                    child: PointerInterceptor(child: Text('1.4')),
+                    child: PointerInterceptor(child: const Text('1.4')),
                   ),
                   CustomDropdownMenuItem(
                     value: 1.5,
-                    child: PointerInterceptor(child: Text('1.5')),
+                    child: PointerInterceptor(child: const Text('1.5')),
                   ),
                   CustomDropdownMenuItem(
                     value: 1.6,
-                    child: PointerInterceptor(child: Text('1.6')),
+                    child: PointerInterceptor(child: const Text('1.6')),
                   ),
                   CustomDropdownMenuItem(
                     value: 1.8,
-                    child: PointerInterceptor(child: Text('1.8')),
+                    child: PointerInterceptor(child: const Text('1.8')),
                   ),
                   CustomDropdownMenuItem(
                     value: 2,
-                    child: PointerInterceptor(child: Text('2.0')),
+                    child: PointerInterceptor(child: const Text('2.0')),
                   ),
                   CustomDropdownMenuItem(
-                      value: 3, child: PointerInterceptor(child: Text('3.0'))),
+                      value: 3,
+                      child: PointerInterceptor(child: const Text('3.0'))),
                 ],
                 value: _lineHeightSelectedItem,
                 onChanged: (double? changed) async {
@@ -1643,7 +1652,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               }
             },
             isSelected: _textDirectionSelected,
-            children: [
+            children: const [
               Icon(Icons.format_textdirection_l_to_r),
               Icon(Icons.format_textdirection_r_to_l),
             ],
@@ -1686,22 +1695,23 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 items: [
                   CustomDropdownMenuItem(
                     value: 'lower',
-                    child: PointerInterceptor(child: Text('lowercase')),
+                    child: PointerInterceptor(child: const Text('lowercase')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'sentence',
-                    child: PointerInterceptor(child: Text('Sentence case')),
+                    child:
+                        PointerInterceptor(child: const Text('Sentence case')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'title',
-                    child: PointerInterceptor(child: Text('Title Case')),
+                    child: PointerInterceptor(child: const Text('Title Case')),
                   ),
                   CustomDropdownMenuItem(
                     value: 'upper',
-                    child: PointerInterceptor(child: Text('UPPERCASE')),
+                    child: PointerInterceptor(child: const Text('UPPERCASE')),
                   ),
                 ],
-                hint: Text('Change case'),
+                hint: const Text('Change case'),
                 value: null,
                 onChanged: (String? changed) async {
                   if (changed != null) {
@@ -1797,7 +1807,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         child: StatefulBuilder(builder:
                             (BuildContext context, StateSetter setState) {
                           return AlertDialog(
-                            title: Text('Insert Link'),
+                            title: const Text('Insert Link'),
                             scrollable: true,
                             content: Form(
                               key: formKey,
@@ -1805,15 +1815,15 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Text to display',
+                                    const Text('Text to display',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     TextField(
                                       controller: text,
                                       focusNode: textFocus,
                                       textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         hintText: 'Text',
                                       ),
@@ -1821,16 +1831,16 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                         urlFocus.requestFocus();
                                       },
                                     ),
-                                    SizedBox(height: 20),
-                                    Text('URL',
+                                    const SizedBox(height: 20),
+                                    const Text('URL',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     TextFormField(
                                       controller: url,
                                       focusNode: urlFocus,
                                       textInputAction: TextInputAction.done,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         hintText: 'URL',
                                       ),
@@ -1848,7 +1858,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                           width: 24.0,
                                           child: Checkbox(
                                             value: openNewTab,
-                                            activeColor: Color(0xFF827250),
+                                            activeColor:
+                                                const Color(0xFF827250),
                                             onChanged: (bool? value) {
                                               setState(() {
                                                 openNewTab = value!;
@@ -1860,7 +1871,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Theme.of(context)
                                                   .dialogBackgroundColor,
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 5, right: 5),
                                               elevation: 0.0),
                                           onPressed: () {
@@ -1872,7 +1883,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                               style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color)),
                                         ),
                                       ],
@@ -1884,7 +1895,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -1911,7 +1922,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                     Navigator.of(context).pop();
                                   }
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               )
                             ],
                           );
@@ -1937,7 +1948,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         child: StatefulBuilder(builder:
                             (BuildContext context, StateSetter setState) {
                           return AlertDialog(
-                            title: Text('Insert Image'),
+                            title: const Text('Insert Image'),
                             scrollable: true,
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -1945,12 +1956,12 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 children: [
                                   if (widget
                                       .htmlToolbarOptions.allowImagePicking)
-                                    Text('Select from files',
+                                    const Text('Select from files',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
                                   if (widget
                                       .htmlToolbarOptions.allowImagePicking)
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                   if (widget
                                       .htmlToolbarOptions.allowImagePicking)
                                     TextFormField(
@@ -1962,7 +1973,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                                 backgroundColor:
                                                     Theme.of(context)
                                                         .dialogBackgroundColor,
-                                                padding: EdgeInsets.only(
+                                                padding: const EdgeInsets.only(
                                                     left: 5, right: 5),
                                                 elevation: 0.0),
                                             onPressed: () async {
@@ -1986,40 +1997,41 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1
+                                                        .bodyLarge
                                                         ?.color)),
                                           ),
                                           suffixIcon: result != null
                                               ? IconButton(
-                                                  icon: Icon(Icons.close),
+                                                  icon: const Icon(Icons.close),
                                                   onPressed: () {
                                                     setState(() {
                                                       result = null;
                                                       filename.text = '';
                                                     });
                                                   })
-                                              : Container(height: 0, width: 0),
+                                              : const SizedBox(
+                                                  height: 0, width: 0),
                                           errorText: validateFailed,
                                           errorMaxLines: 2,
                                           border: InputBorder.none,
                                         )),
                                   if (widget
                                       .htmlToolbarOptions.allowImagePicking)
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                   if (widget
                                       .htmlToolbarOptions.allowImagePicking)
-                                    Text('URL',
+                                    const Text('URL',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
                                   if (widget
                                       .htmlToolbarOptions.allowImagePicking)
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                   TextField(
                                     controller: url,
                                     focusNode: urlFocus,
                                     textInputAction: TextInputAction.done,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: const OutlineInputBorder(),
                                       hintText: 'URL',
                                       errorText: validateFailed,
                                       errorMaxLines: 2,
@@ -2031,7 +2043,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -2078,7 +2090,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                     Navigator.of(context).pop();
                                   }
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               )
                             ],
                           );
@@ -2104,16 +2116,16 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         child: StatefulBuilder(builder:
                             (BuildContext context, StateSetter setState) {
                           return AlertDialog(
-                            title: Text('Insert Audio'),
+                            title: const Text('Insert Audio'),
                             scrollable: true,
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Select from files',
+                                  const Text('Select from files',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   TextFormField(
                                       controller: filename,
                                       readOnly: true,
@@ -2122,7 +2134,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Theme.of(context)
                                                   .dialogBackgroundColor,
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 5, right: 5),
                                               elevation: 0.0),
                                           onPressed: () async {
@@ -2146,34 +2158,35 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                               style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color)),
                                         ),
                                         suffixIcon: result != null
                                             ? IconButton(
-                                                icon: Icon(Icons.close),
+                                                icon: const Icon(Icons.close),
                                                 onPressed: () {
                                                   setState(() {
                                                     result = null;
                                                     filename.text = '';
                                                   });
                                                 })
-                                            : Container(height: 0, width: 0),
+                                            : const SizedBox(
+                                                height: 0, width: 0),
                                         errorText: validateFailed,
                                         errorMaxLines: 2,
                                         border: InputBorder.none,
                                       )),
-                                  SizedBox(height: 20),
-                                  Text('URL',
+                                  const SizedBox(height: 20),
+                                  const Text('URL',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   TextField(
                                     controller: url,
                                     focusNode: urlFocus,
                                     textInputAction: TextInputAction.done,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: const OutlineInputBorder(),
                                       hintText: 'URL',
                                       errorText: validateFailed,
                                       errorMaxLines: 2,
@@ -2185,7 +2198,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -2230,7 +2243,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                     Navigator.of(context).pop();
                                   }
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               )
                             ],
                           );
@@ -2256,16 +2269,16 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         child: StatefulBuilder(builder:
                             (BuildContext context, StateSetter setState) {
                           return AlertDialog(
-                            title: Text('Insert Video'),
+                            title: const Text('Insert Video'),
                             scrollable: true,
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Select from files',
+                                  const Text('Select from files',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   TextFormField(
                                       controller: filename,
                                       readOnly: true,
@@ -2274,7 +2287,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Theme.of(context)
                                                   .dialogBackgroundColor,
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 5, right: 5),
                                               elevation: 0.0),
                                           onPressed: () async {
@@ -2298,34 +2311,35 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                               style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color)),
                                         ),
                                         suffixIcon: result != null
                                             ? IconButton(
-                                                icon: Icon(Icons.close),
+                                                icon: const Icon(Icons.close),
                                                 onPressed: () {
                                                   setState(() {
                                                     result = null;
                                                     filename.text = '';
                                                   });
                                                 })
-                                            : Container(height: 0, width: 0),
+                                            : const SizedBox(
+                                                height: 0, width: 0),
                                         errorText: validateFailed,
                                         errorMaxLines: 2,
                                         border: InputBorder.none,
                                       )),
-                                  SizedBox(height: 20),
-                                  Text('URL',
+                                  const SizedBox(height: 20),
+                                  const Text('URL',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   TextField(
                                     controller: url,
                                     focusNode: urlFocus,
                                     textInputAction: TextInputAction.done,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: const OutlineInputBorder(),
                                       hintText: 'URL',
                                       errorText: validateFailed,
                                       errorMaxLines: 2,
@@ -2337,7 +2351,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -2382,7 +2396,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                     Navigator.of(context).pop();
                                   }
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               )
                             ],
                           );
@@ -2408,16 +2422,16 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         child: StatefulBuilder(builder:
                             (BuildContext context, StateSetter setState) {
                           return AlertDialog(
-                            title: Text('Insert File'),
+                            title: const Text('Insert File'),
                             scrollable: true,
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Select from files',
+                                  const Text('Select from files',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   TextFormField(
                                       controller: filename,
                                       readOnly: true,
@@ -2426,7 +2440,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Theme.of(context)
                                                   .dialogBackgroundColor,
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 5, right: 5),
                                               elevation: 0.0),
                                           onPressed: () async {
@@ -2450,34 +2464,35 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                               style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color)),
                                         ),
                                         suffixIcon: result != null
                                             ? IconButton(
-                                                icon: Icon(Icons.close),
+                                                icon: const Icon(Icons.close),
                                                 onPressed: () {
                                                   setState(() {
                                                     result = null;
                                                     filename.text = '';
                                                   });
                                                 })
-                                            : Container(height: 0, width: 0),
+                                            : const SizedBox(
+                                                height: 0, width: 0),
                                         errorText: validateFailed,
                                         errorMaxLines: 2,
                                         border: InputBorder.none,
                                       )),
-                                  SizedBox(height: 20),
-                                  Text('URL',
+                                  const SizedBox(height: 20),
+                                  const Text('URL',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   TextField(
                                     controller: url,
                                     focusNode: urlFocus,
                                     textInputAction: TextInputAction.done,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: const OutlineInputBorder(),
                                       hintText: 'URL',
                                       errorText: validateFailed,
                                       errorMaxLines: 2,
@@ -2489,7 +2504,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -2517,7 +2532,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                     Navigator.of(context).pop();
                                   }
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               )
                             ],
                           );
@@ -2540,7 +2555,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         child: StatefulBuilder(builder:
                             (BuildContext context, StateSetter setState) {
                           return AlertDialog(
-                            title: Text('Insert Table'),
+                            title: const Text('Insert Table'),
                             scrollable: true,
                             content: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -2554,7 +2569,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                     onChanged: (value) =>
                                         setState(() => currentRows = value),
                                   ),
-                                  Text('x'),
+                                  const Text('x'),
                                   NumberPicker(
                                     value: currentCols,
                                     minValue: 1,
@@ -2568,7 +2583,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -2583,7 +2598,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                   }
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               )
                             ],
                           );
@@ -2681,14 +2696,14 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                           child: StatefulBuilder(builder:
                               (BuildContext context, StateSetter setState) {
                             return AlertDialog(
-                              title: Text('Help'),
+                              title: const Text('Help'),
                               scrollable: true,
-                              content: Container(
+                              content: SizedBox(
                                 height: MediaQuery.of(context).size.height / 2,
                                 child: SingleChildScrollView(
                                   child: DataTable(
                                     columnSpacing: 5,
-                                    dataRowHeight: 75,
+                                    dataRowMinHeight: 75,
                                     columns: const <DataColumn>[
                                       DataColumn(
                                         label: Text(
@@ -2905,7 +2920,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                   onPressed: () async {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text('Close'),
+                                  child: const Text('Close'),
                                 )
                               ],
                             );

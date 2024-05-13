@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:html' as html;
 
 import 'package:flutter/foundation.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:html_editor_enhanced/src/html_editor_controller_unsupported.dart'
+import 'package:html_editor_enhanced_plus/html_editor.dart';
+import 'package:html_editor_enhanced_plus/src/html_editor_controller_unsupported.dart'
     as unsupported;
 import 'package:meta/meta.dart';
 
@@ -18,6 +18,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
 
   /// Toolbar widget state to call various methods. For internal use only.
   @override
+  // ignore: overridden_fields
   ToolbarWidgetState? toolbar;
 
   /// Determines whether text processing should happen on input HTML, e.g.
@@ -25,6 +26,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   ///
   /// The default value is true.
   @override
+  // ignore: overridden_fields
   final bool processInputHtml;
 
   /// Determines whether newlines (\n) should be written as <br>. This is not
@@ -32,6 +34,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   ///
   /// The default value is false.
   @override
+  // ignore: overridden_fields
   final bool processNewLineAsBr;
 
   /// Determines whether text processing should happen on output HTML, e.g.
@@ -40,6 +43,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   ///
   /// The default value is true.
   @override
+  // ignore: overridden_fields
   final bool processOutputHtml;
 
   /// Manages the view ID for the [HtmlEditorController] on web
@@ -187,7 +191,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   void clearFocus() {
     throw Exception(
-        'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart and check kIsWeb before calling this method.');
+        'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_plus/html_editor.dart and check kIsWeb before calling this method.');
   }
 
   /// Resets the height of the editor back to the original if it was changed to
@@ -196,7 +200,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   void resetHeight() {
     throw Exception(
-        'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart and check kIsWeb before calling this method.');
+        'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_plus/html_editor.dart and check kIsWeb before calling this method.');
   }
 
   /// Refresh the page
@@ -288,7 +292,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
       _evaluateJavascriptWeb(data: {
         'type': 'toIframe: addNotification',
         'html': html,
-        'alertType': 'alert alert-${describeEnum(notificationType)}'
+        'alertType': 'alert alert-${notificationType.name}'
       });
     }
     recalculateHeight();
@@ -318,12 +322,12 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   void _evaluateJavascriptWeb({required Map<String, Object?> data}) async {
     if (kIsWeb) {
       data['view'] = _viewId;
-      final jsonEncoder = JsonEncoder();
+      const jsonEncoder = JsonEncoder();
       var json = jsonEncoder.convert(data);
       html.window.postMessage(json, '*');
     } else {
       throw Exception(
-          'Non-Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart');
+          'Non-Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_plus/html_editor.dart');
     }
   }
 }

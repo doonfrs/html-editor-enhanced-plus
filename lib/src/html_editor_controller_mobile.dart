@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:html_editor_enhanced/src/html_editor_controller_unsupported.dart'
+import 'package:html_editor_enhanced_plus/html_editor.dart';
+import 'package:html_editor_enhanced_plus/src/html_editor_controller_unsupported.dart'
     as unsupported;
 
 /// Controller for mobile
@@ -13,15 +13,12 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
     this.processOutputHtml = true,
   });
 
-  /// Toolbar widget state to call various methods. For internal use only.
-  @override
-  ToolbarWidgetState? toolbar;
-
   /// Determines whether text processing should happen on input HTML, e.g.
   /// whether a new line should be converted to a <br>.
   ///
   /// The default value is false.
   @override
+  // ignore: overridden_fields
   final bool processInputHtml;
 
   /// Determines whether newlines (\n) should be written as <br>. This is not
@@ -29,6 +26,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   ///
   /// The default value is false.
   @override
+  // ignore: overridden_fields
   final bool processNewLineAsBr;
 
   /// Determines whether text processing should happen on output HTML, e.g.
@@ -37,6 +35,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   ///
   /// The default value is true.
   @override
+  // ignore: overridden_fields
   final bool processOutputHtml;
 
   /// Manages the [InAppWebViewController] for the [HtmlEditorController]
@@ -195,7 +194,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   void reloadWeb() {
     throw Exception(
-        'Non-Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart and check kIsWeb before calling this function');
+        'Non-Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_plus/html_editor.dart and check kIsWeb before calling this function');
   }
 
   /// Resets the height of the editor back to the original if it was changed to
@@ -224,7 +223,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   void addNotification(String html, NotificationType notificationType) async {
     await _evaluateJavascript(source: """
         \$('.note-status-output').html(
-          '<div class="alert alert-${describeEnum(notificationType)}">$html</div>'
+          '<div class="alert alert-${notificationType.name}">$html</div>'
         );
         """);
     recalculateHeight();
@@ -265,7 +264,7 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
       return result;
     } else {
       throw Exception(
-          'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart');
+          'Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced_plus/html_editor.dart');
     }
   }
 
